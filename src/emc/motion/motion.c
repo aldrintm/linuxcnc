@@ -699,11 +699,16 @@ static int init_comm_buffers(void)
       emcmot_axis_t *axis;
       axis = &axes[axis_num];
       axis->locking_joint = -1;
+      axis->teleop_tp.min_pos = -1e308;
+      axis->teleop_tp.max_pos =  1e308;
    }
     /* init per-joint stuff */
     for (joint_num = 0; joint_num < emcmotConfig->numJoints; joint_num++) {
 	/* point to structure for this joint */
 	joint = &joints[joint_num];
+
+	joint->free_tp.min_pos = -1e308;
+	joint->free_tp.max_pos =  1e308;
 
 	/* init the config fields with some "reasonable" defaults" */
 	joint->type = 0;
